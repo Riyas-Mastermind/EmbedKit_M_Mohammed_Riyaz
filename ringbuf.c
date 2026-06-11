@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BUFFER_SIZE 8
+#define BUFFER_SIZE                 8
 
 /* Return codes for buffer operations */
-#define RINGBUF_SUCCESS  0
-#define RINGBUF_ERROR   -1
+#define RINGBUF_SUCCESS             0
+#define RINGBUF_ERROR              -1
 
 typedef struct {
     uint8_t storage[BUFFER_SIZE]; /* ONE array with 8 data slots */
