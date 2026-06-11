@@ -5,7 +5,7 @@
 #define BUFFER_SIZE 8
 
 /* Return codes for buffer operations */
-#define RINGBUF_SUCCESS 0
+#define RINGBUF_SUCCESS  0
 #define RINGBUF_ERROR   -1
 
 typedef struct {
