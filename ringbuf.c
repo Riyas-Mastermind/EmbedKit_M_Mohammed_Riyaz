@@ -9,10 +9,10 @@
 #define RINGBUF_ERROR              -1
 
 typedef struct {
-    uint8_t storage[BUFFER_SIZE]; /* ONE array with 8 data slots */
-    uint8_t head;                 /* Index for the next write (0 to 7) */
-    uint8_t tail;                 /* Index for the next read (0 to 7) */
-    uint8_t count;                /* Tracks total unread items (0 to 8) */
+    uint8_t storage[BUFFER_SIZE];       /* ONE array with 8 data slots */
+    uint8_t head;                       /* Index for the next write (0 to 7) */
+    uint8_t tail;                       /* Index for the next read (0 to 7) */
+    uint8_t count;                      /* Tracks total unread items (0 to 8) */
 } RingBuffer_t;
 
 /* --- Function API Prototypes --- */
