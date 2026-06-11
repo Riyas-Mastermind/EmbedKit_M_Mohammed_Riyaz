@@ -23,6 +23,7 @@ uint8_t ringbuf_count(const RingBuffer_t *rb);
 int ringbuf_is_full(const RingBuffer_t *rb);
 int ringbuf_is_empty(const RingBuffer_t *rb);
 
+
 /* --- Function Implementations --- */
 
 /**
