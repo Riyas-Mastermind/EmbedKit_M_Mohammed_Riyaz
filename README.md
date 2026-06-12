@@ -51,6 +51,8 @@ rb->head = (rb->head + 1) & (BUFFER_SIZE - 1);
 
 Since `8` is binary `1000`, `8 - 1` is `7` (binary `0111`). By bitwise ANDing the incrementing index with `0111`, the upper overflow bit is instantly stripped the moment the index hits `8`, instantly snapping it back to `0`. This operation executes natively in the CPU's Arithmetic Logic Unit (ALU) in exactly one single clock cycle.
 
+---
+
 ## 📊 Output Validation
 The `main()` sequence executes a rigorous test of the buffer's boundary conditions, including filling the buffer, attempting an illegal write when full, performing partial reads, dynamically reusing freed slots, and attempting an illegal read when empty.
 
@@ -63,6 +65,8 @@ The `main()` sequence executes a rigorous test of the buffer's boundary conditio
 * **Slot Reuse:** Writing 3 new bytes (`0x49`, `0x4A`, `0x4B`) successfully utilizes the newly freed RAM slots.
 * **Underflow Protection:** Attempting to read after the buffer reaches `count=0 (EMPTY)` results in a safe `FAIL`.
 
+---
+
 ## 🛠️ Build and Execution Instructions
 
 This project is written in strictly compliant C99 and is designed to compile cleanly without any warnings or errors. 
@@ -71,3 +75,60 @@ This project is written in strictly compliant C99 and is designed to compile cle
 Ensure you have a standard C compiler like GCC (GNU Compiler Collection) installed on your system. You can verify your installation by running:
 ```bash
 gcc --version
+```
+### Ring Buffer Implementation
+
+This project demonstrates a simple **Ring Buffer (Circular Buffer)** implementation in C, including boundary-condition testing for overflow and underflow protection.
+
+## Step 1: Compilation
+
+Open your terminal, navigate to the directory containing `ringbuf.c`, and run the following strict build command:
+
+```bash
+gcc -Wall -std=c99 ringbuf.c -o ring_buffer
+```
+
+### Command Breakdown
+
+- **`gcc`**  
+  Invokes the GNU C Compiler.
+
+- **`-Wall`**  
+  Enables all compiler warning messages. A clean build here demonstrates defensive programming and memory safety.
+
+- **`-std=c99`**  
+  Forces the compiler to strictly adhere to the C99 standard, ensuring cross-platform compatibility for microcontrollers.
+
+- **`-o ring_buffer`**  
+  Generates the final executable file named `ring_buffer`.
+
+> **Note:**  
+> A successful compilation will return absolutely no output to the terminal. This confirms that the code produced **zero errors** and **zero warnings**.
+
+## Step 2: Execution
+
+Once compiled successfully, run the executable:
+
+```bash
+./ring_buffer
+```
+
+## Step 3: Verification
+
+Upon execution, the terminal will print the complete boundary-condition test sequence.
+
+The expected behavior includes:
+
+- Buffer fills until capacity is reached.
+- Overflow write attempt is rejected safely.
+- Data is read in FIFO order.
+- Additional writes after reads are accepted correctly.
+- Underflow read attempt is rejected safely.
+
+Example output:
+
+```plaintext
+...
+[READ] -> 0x4B (count=0) EMPTY
+[READ] (empty) -> FAIL (buffer empty)
+```
