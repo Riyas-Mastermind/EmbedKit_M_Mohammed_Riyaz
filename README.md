@@ -50,3 +50,15 @@ rb->head = (rb->head + 1) & (BUFFER_SIZE - 1);
 ```
 
 Since `8` is binary `1000`, `8 - 1` is `7` (binary `0111`). By bitwise ANDing the incrementing index with `0111`, the upper overflow bit is instantly stripped the moment the index hits `8`, instantly snapping it back to `0`. This operation executes natively in the CPU's Arithmetic Logic Unit (ALU) in exactly one single clock cycle.
+
+## 📊 Output Validation
+The `main()` sequence executes a rigorous test of the buffer's boundary conditions, including filling the buffer, attempting an illegal write when full, performing partial reads, dynamically reusing freed slots, and attempting an illegal read when empty.
+
+![Terminal Output Validation](./RingBuffer_output.png)
+
+**Expected Trace:**
+* **Writes:** Successfully pushes `0x41` through `0x48` until `count=8 (FULL)`.
+* **Overflow Protection:** Pushing `0x99` into the full buffer results in a safe `FAIL`.
+* **Partial Draining:** Reading 3 bytes retrieves the oldest data (`0x41`, `0x42`, `0x43`) and drops the count to 5.
+* **Slot Reuse:** Writing 3 new bytes (`0x49`, `0x4A`, `0x4B`) successfully utilizes the newly freed RAM slots.
+* **Underflow Protection:** Attempting to read after the buffer reaches `count=0 (EMPTY)` results in a safe `FAIL`.
