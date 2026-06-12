@@ -49,4 +49,4 @@ Because this buffer's size is strictly locked to a power of two (`8`), this modu
 rb->head = (rb->head + 1) & (BUFFER_SIZE - 1);
 ```
 
-Since 8 is binary 1000, 8 - 1 is 7 (binary 0111). By bitwise ANDing the incrementing index with 0111, the upper overflow bit is instantly stripped the moment the index hits 8, instantly snapping it back to 0. This operation executes natively in the CPU's Arithmetic Logic Unit (ALU) in exactly one single clock cycle.
+Since `8` is binary `1000`, `8 - 1` is `7` (binary `0111`). By bitwise ANDing the incrementing index with `0111`, the upper overflow bit is instantly stripped the moment the index hits `8`, instantly snapping it back to `0`. This operation executes natively in the CPU's Arithmetic Logic Unit (ALU) in exactly one single clock cycle.
