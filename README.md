@@ -62,3 +62,12 @@ The `main()` sequence executes a rigorous test of the buffer's boundary conditio
 * **Partial Draining:** Reading 3 bytes retrieves the oldest data (`0x41`, `0x42`, `0x43`) and drops the count to 5.
 * **Slot Reuse:** Writing 3 new bytes (`0x49`, `0x4A`, `0x4B`) successfully utilizes the newly freed RAM slots.
 * **Underflow Protection:** Attempting to read after the buffer reaches `count=0 (EMPTY)` results in a safe `FAIL`.
+
+## 🛠️ Build and Execution Instructions
+
+This project is written in strictly compliant C99 and is designed to compile cleanly without any warnings or errors. 
+
+### Prerequisites
+Ensure you have a standard C compiler like GCC (GNU Compiler Collection) installed on your system. You can verify your installation by running:
+```bash
+gcc --version
